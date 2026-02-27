@@ -179,9 +179,16 @@ public class RNFloatingBubbleModule extends ReactContextBaseJavaModule {
   public void requestPermissionAction(final Promise promise) {
     if (!hasPermission()) {
       Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-          Uri.parse("package:" + reactContext.getPackageName()));
-      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-      reactContext.startActivity(intent);
+          Uri.fromParts("package", reactContext.getPackageName(), null));
+      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+      try {
+        reactContext.startActivity(intent);
+      } catch (Exception e) {
+        // Fallback to general settings if specific one fails
+        Intent fallbackIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+        fallbackIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        reactContext.startActivity(fallbackIntent);
+      }
     }
     if (hasPermission()) {
       promise.resolve("");
