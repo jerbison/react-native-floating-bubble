@@ -108,19 +108,31 @@ public class RNFloatingBubbleModule extends ReactContextBaseJavaModule {
     this.removeBubble();
     bubbleView = (BubbleLayout) LayoutInflater.from(reactContext).inflate(R.layout.bubble_layout, null);
 
-    // Set dynamic icon if path is provided
-    if (iconPath != null && !iconPath.isEmpty()) {
-      try {
-        File imgFile = new File(iconPath);
-        if (imgFile.exists()) {
-          Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-          ImageView imageView = (ImageView) bubbleView.findViewById(R.id.avatar);
-          if (imageView != null) {
+    // Set dynamic icon if path is provided, else use app icon
+    ImageView imageView = (ImageView) bubbleView.findViewById(R.id.avatar);
+    if (imageView != null) {
+      boolean iconSet = false;
+      if (iconPath != null && !iconPath.isEmpty()) {
+        try {
+          File imgFile = new File(iconPath);
+          if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             imageView.setImageBitmap(myBitmap);
+            iconSet = true;
           }
+        } catch (Exception e) {
+          // Fallback
         }
-      } catch (Exception e) {
-        // Fallback to default icon
+      }
+
+      if (!iconSet) {
+        try {
+          android.graphics.drawable.Drawable appIcon = reactContext.getPackageManager()
+              .getApplicationIcon(reactContext.getPackageName());
+          imageView.setImageDrawable(appIcon);
+        } catch (Exception e) {
+          // Final fallback to XML default
+        }
       }
     }
 
