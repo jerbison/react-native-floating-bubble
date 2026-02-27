@@ -3,7 +3,7 @@
     android:ordering="together">
     <objectAnimator
         android:duration="150"
-        android:interpolator="@android:interpolator/overshoot"
+        android:interpolator="@android:anim/overshoot_interpolator"
         android:propertyName="translationY"
         android:valueType="floatType"
         android:valueFrom="500.0f"

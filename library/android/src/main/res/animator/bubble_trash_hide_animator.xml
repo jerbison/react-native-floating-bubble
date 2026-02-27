@@ -3,7 +3,7 @@
     android:ordering="together">
     <objectAnimator
         android:duration="100"
-        android:interpolator="@android:interpolator/accelerate"
+        android:interpolator="@android:anim/accelerate_interpolator"
         android:propertyName="translationY"
         android:valueType="floatType"
         android:valueFrom="0.0f"
