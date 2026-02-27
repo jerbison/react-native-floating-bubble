@@ -1,13 +1,16 @@
-
 import { NativeModules } from 'react-native';
 
 const { RNFloatingBubble } = NativeModules;
 
-export const reopenApp = () => RNFloatingBubble.reopenApp();
-export const showFloatingBubble = (x = 50, y = 100, iconPath = "") => RNFloatingBubble.showFloatingBubble(x, y, iconPath);
-export const hideFloatingBubble = () => RNFloatingBubble.hideFloatingBubble();
-export const checkPermission = () => RNFloatingBubble.checkPermission();
-export const requestPermission = () => RNFloatingBubble.requestPermission();
-export const initialize = () => RNFloatingBubble.initialize();
+if (!RNFloatingBubble) {
+    console.warn('[RNFloatingBubble] Native module is null. Ensure you have rebuilt the native app.');
+}
+
+export const reopenApp = () => RNFloatingBubble ? RNFloatingBubble.reopenApp() : Promise.resolve();
+export const showFloatingBubble = (x = 50, y = 100, iconPath = "") => RNFloatingBubble ? RNFloatingBubble.showFloatingBubble(x, y, iconPath) : Promise.resolve();
+export const hideFloatingBubble = () => RNFloatingBubble ? RNFloatingBubble.hideFloatingBubble() : Promise.resolve();
+export const checkPermission = () => RNFloatingBubble ? RNFloatingBubble.checkPermission() : Promise.resolve(false);
+export const requestPermission = () => RNFloatingBubble ? RNFloatingBubble.requestPermission() : Promise.resolve();
+export const initialize = () => RNFloatingBubble ? RNFloatingBubble.initialize() : Promise.resolve();
 
 export default { showFloatingBubble, hideFloatingBubble, requestPermission, checkPermission, initialize, reopenApp };

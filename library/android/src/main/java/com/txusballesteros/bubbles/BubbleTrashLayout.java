@@ -5,7 +5,7 @@ import android.animation.AnimatorSet;
 import android.content.Context;
 import android.os.Vibrator;
 import android.util.AttributeSet;
-import com.floatingbubble.R;
+import com.reactlibrary.R;
 
 public class BubbleTrashLayout extends BubbleBaseLayout {
     public static final int VIBRATION_DURATION_IN_MS = 70;

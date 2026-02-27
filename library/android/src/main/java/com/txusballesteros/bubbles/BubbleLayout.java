@@ -11,7 +11,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
-import com.floatingbubble.R;
+import com.reactlibrary.R;
 
 public class BubbleLayout extends BubbleBaseLayout {
     private float initialTouchX;

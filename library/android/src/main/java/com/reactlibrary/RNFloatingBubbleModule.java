@@ -9,7 +9,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import com.floatingbubble.R;
+import com.reactlibrary.R;
 
 import android.os.Bundle;
 import android.os.Build;
